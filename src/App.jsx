@@ -1,25 +1,29 @@
 import axios from "axios"
-import { API_URL } from "./hooks/API_URL"
+import { LIST_URL } from "./hooks/API_URL"
 import { useEffect, useState } from "react"
 
 function App() {
 
-  const [dogi, useDog] = useState([])
+  const [dog, setDog] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_URL}/list/all`)
+    axios.get(`${LIST_URL}/hound/afghan/images/random/3`)
     .then(resp => {
-      useDog(resp)
+      setDog(resp.data.message)
     })
     .catch(err => {
       console.log(err)
     })
-  })
+  }, [])
 
   return(
     <>
       <h1> hola mundo </h1>
-      <p> {JSON.stringify(dogi)} </p>
+      <div>
+        {dog.map(dog => (
+          <img key={dog} src={dog} alt="Imagen" />
+        ))}
+      </div>
     </>
   )
 }

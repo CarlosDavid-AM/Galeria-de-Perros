@@ -1,28 +1,18 @@
-import axios from "axios"
-import { LIST_URL } from "./hooks/API_URL"
-import { useEffect, useState } from "react"
+import InfoDog from "./components/InfoDog"
+import "./css/index.css"
+import usePetision from "./hooks/usePetision"
 
 function App() {
 
-  const [dog, setDog] = useState([]);
-
-  useEffect(() => {
-    axios.get(`${LIST_URL}/hound/afghan/images/random/3`)
-    .then(resp => {
-      setDog(resp.data.message)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }, [])
+  const [dog, cargandoDog] = usePetision("/hound/afghan/images/random/3")
+  
+  if(cargandoDog) return <span>Cargando...</span>
 
   return(
     <>
-      <h1> hola mundo </h1>
-      <div>
-        {dog.map(dog => (
-          <img key={dog} src={dog} alt="Imagen" />
-        ))}
+      <InfoDog />
+      <div className="dog-gallery">
+        {dog.map( (dogUrl, index) => (<img key={index} src={dogUrl} alt="Imagen" />) )}
       </div>
     </>
   )

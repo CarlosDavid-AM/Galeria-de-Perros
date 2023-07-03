@@ -1,8 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { LIST_URL } from "./API_URL"
 
-const usePetision = (enpoint) => {
+const ImagePetision = (ruta, enpoint) => {
 
   const [dog, setDog] = useState([]);
   const [cargango, setCargando] = useState(false)
@@ -11,7 +10,7 @@ const usePetision = (enpoint) => {
 
     setCargando(true)
 
-    axios.get(`${LIST_URL}${enpoint}`)
+    axios.get(`${ruta}${enpoint}`)
     .then(resp => {
       setCargando(false)
       setDog(resp.data.message)
@@ -25,4 +24,4 @@ const usePetision = (enpoint) => {
   return [dog, cargango]
 }
 
-export default usePetision
+export default ImagePetision

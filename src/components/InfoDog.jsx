@@ -1,4 +1,4 @@
-import "../css/index.css"
+import "../css/dogGallery.css"
 
 const InfoDog = () => {
   return(
